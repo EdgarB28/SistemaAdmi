@@ -1,0 +1,149 @@
+.card {
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco con opacidad */
+    border: none; /* Sin borde */
+    border-radius: 10px; /* Bordes redondeados */
+    backdrop-filter: blur(10px); /* Difumina el fondo */
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url(../img/cabe.png);
+    background-size: cover; /* Ajusta la imagen para que cubra toda la página */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen */
+    grid-template-columns: 1fr 2fr;
+}
+
+header {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    align-items: center;
+    padding: 10px 20px;
+    
+    height: 90px; /* Ajusta la altura de la cabecera */
+}
+
+.logo {
+    height: 200px; /* Ajusta la altura del logo para que se ajuste a la cabecera */
+    width: 300px; /* Mantiene la proporción del logo */
+   
+    left: 80px; /* Ajusta la posición del logo */
+    
+}
+
+.showFormButton {
+    
+    margin: 15px 0; /* Espaciado vertical entre botones */
+    padding: 45px 75px;
+    border: none;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    background-color: #858585;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 10px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 16px; /* Tamaño de la fuente */
+}
+.formulario{
+    box-shadow: 0 0 0 ;
+    border-radius: 10px;
+    padding: 65px 125px;
+    font-size: 20px;
+}
+
+.showFormButton:hover {
+    background-color: #d8d7d7;
+}
+
+
+
+.salir {
+    background-color: #b12727; /* Color inicial */
+}
+.salir:hover{
+    background-color: #df2e2e;
+}
+.añadir {
+    background-color: #4c913e; /* Color inicial */
+    padding: 25px 45px  ;
+}
+.añadir:hover{
+    background-color:#6eff0d;
+}
+.editar{
+    background-color: #998200;
+    padding: 25px 45px  ;
+}
+.editar:hover{
+    background-color: yellow;
+}
+.borrar{
+    background-color: #b12727;
+    padding: 25px 45px  ;
+}
+.borrar:hover{
+    background-color:rgb(255, 0, 0)
+}
+.container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end; /* Alinear todo a la derecha */
+    
+}
+
+.row {
+    display: flex;
+    width: 100%;
+}
+
+.col-left {
+    width: 300px; /* Ancho fijo para la columna de formularios */
+    padding-left: 20px; /* Espacio a la izquierda */
+}
+
+.col-right {
+
+    background-image: url(../img/cabe.png )   ;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around; /*centrar*/
+    width: 100%;
+    height: 570px;
+    margin-left: 50px;
+    margin-right: 50px;
+    justify-content: space-around; /*centrar*/
+     /*justify-content: space-between; /* Distribuye el espacio entre botones */
+    align-items: stretch;/* Asegura que los botones tengan la misma altura */
+    overflow: hidden; /* Evita que el contenido sobresalga */
+}
+
+.nav1 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaciado entre los botones */
+}
+
+.form-container {
+    margin-bottom: 20px; /* Espacio entre formularios */
+    
+}
+
+.nav2{
+    display: flex;
+    gap: 50px;
+    margin: 20px;
+    flex-flow:wrap; /* Permite que los botones se envuelvan */
+    justify-content: center
+ }
+.nav3{
+    
+    justify-content: center;
+    display: flex;
+    margin: auto;
+    gap: 50px;
+
+    
+}
