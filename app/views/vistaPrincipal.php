@@ -1,69 +1,96 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
-    <title>Admin de Negocio</title>
-</head>
+    <title>Sidebar With Bootstrap</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="/app/css/styles.css">
+    
+  </head>
 
 <body>
-    
-    <header>
-        <img src="../img/logo.png" alt="Logo del Negocio" class="logo">
-    </header>
-
-    <div class="container">
-        <div class="row">
-
-
-
-        <div class="col-left">
-                <nav class="nav1">
-                    <button class="showFormButton" data-form="form1">CATEGORIAS</button>
-                    <button class="showFormButton" data-form="form2">VENTAS</button>
-                    <button class="showFormButton" data-form="form3">REPORTES</button>
-                    <button class="showFormButton salir" data-form="form4">SALIR</button>
-                </nav>
+    <div class="wrapper">
+        <aside id="sidebar">
+            <div class="d-flex">
+                <button id="botonBarra" class="toggle-btn" type="button">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a href="#">PANEL</a>
+                </div>
             </div>
-
-            <div class="col-right">
-                <div id="form1" class="form-container" >
-                <nav class="nav2">
-                    
-                    <button class=" showFormButton formulario" data-form="form5">CRIOLLA</button>
-                    <button class=" showFormButton formulario" data-form="form6">MARINA</button>
-                    <button class=" showFormButton formulario" data-form="form7">ANDINA</button>
-                    <button class=" showFormButton formulario" data-form="form8">SELVA</button>
-                </nav>
-                
-                <nav class="nav3">
-                <button class="showFormButton añadir" data-form="form9">AÑADIR CATEGORÍA</button>
-                <button class="showFormButton editar" data-form="form9">EDITAR CATEGORÍA</button>
-                <button class="showFormButton borrar" data-form="form9">BORRAR CAEGORÍA</button>
-                
-                
-                </nav>
-                </div>
-
-                <div id="form2" class="form-container" style="display: none;">
-                    <h1>VENTAS</h1>
-                    
-                </div>
-
-                <div id="form3" class="form-container" style="display: none;">
-                <h1>REPORTE DE VENTAS</h1>
-                </div>
-
-                
+            <ul class="sidebar-nav">
+                <li id="bntPerfil" class="sidebar-link">
+                    <a href="vistaPerfil.html" class="sidebar-link">
+                        <i class="lni lni-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li id="bntCategoria" class="sidebar-item">
+                    <a href="vistaCategorias.html" class="sidebar-link">
+                        <i class="lni lni-agenda"></i>
+                        <span>Categorias</span>
+                    </a>
+                </li>
+                <li id="bntProductos" class="sidebar-item">
+                    <a href="vistaProductos.html" class="sidebar-link">
+                        <i class="lni lni-agenda"></i>
+                        <span>Productos</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
+                        <i class="lni lni-layout"></i>
+                    <span>Multi Level</span>
+                </a>
+                    <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
+                    <li class="sidebar-item">
+                <a href="#" class="sidebar-link">Link 1</a>
+                     </li>
+                         <li class="sidebar-item">
+                     <a href="#" class="sidebar-link">Link 2</a>
+                     </li>
+                        </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <i class="lni lni-popup"></i>
+                        <span>Notification</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <i class="lni lni-cog"></i>
+                        <span>Setting</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="#" class="sidebar-link">
+                    <i class="lni lni-exit"></i>
+                    <span>Logout</span>
+                </a>
             </div>
-
-           
+        </aside>
+        <div id="capaPrincipal" class="main p-3">
+            <div class="text-center">
+                <h1>
+                    Sidebar Bootstrap 5
+                </h1>
+            </div>
         </div>
     </div>
-
-    <script src="../../public/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="/public/js/script.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        .card {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .profile-icon {
+            font-size: 100px;
+            color: #6c757d;
+            text-align: center;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .input-group-text {
+            width: 100px;
+        }
+
+        .column {
+            width: 70%;
+        }
+
+        .icon-container {
+            width: 40%;
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 130px;
+            /* Tamaño del ícono */
+            color: #007bff;
+            /* Color del ícono */
+            float: right;
+            /* Alinear a la derecha */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">PERFIL DEL USUARIO</h5>
+            <div class="profile-container">
+                <!-- Input fields column -->
+                <div class="column">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">NOMBRES</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" value="Juan" readonly>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">APELLIDO</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" value="Perez" readonly>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">CORREO</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" value="juan.perez@example.com" readonly>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">PERFIL</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" value="Juan Pérez" readonly>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button class="btn btn-primary" type="submit">EDITAR PERFIL</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <i class="bi bi-person-fill icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

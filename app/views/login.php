@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../app/css/styles.css"> <!-- Asegúrate de incluir tu CSS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -22,7 +23,7 @@
                 <br><br><br>
                 <div class="card">
                     <div class="card-header">
-                        <form id="loginForm" method="POST" action="../controller/controladorLogin.php">
+                        <form id="loginForm">
                             <div class="form-group">
                                 <label>Usuario: </label>
                                 <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingresar Usuario">

@@ -1,64 +1,81 @@
-document.addEventListener("DOMContentLoaded", function() {
-    console.log("DOM completamente cargado");
-    var enviarBtn = document.getElementById("enviarBtn");
+$(document).ready(function () {
 
-    if (enviarBtn) {
-        enviarBtn.addEventListener("click", function(event) {
-            event.preventDefault(); // Evita el envío estándar del formulario
+    $("#botonBarra").on("click", function () {
+        $("#sidebar").toggleClass("expand");
+    });
 
-            var usuario = document.getElementById("usuario").value;
-            var contrasena = document.getElementById("passw").value;
+    $("#bntPerfil a").on("click", function (e) {
+        e.preventDefault(); 
+        const targetPage = $(this).attr("href"); 
+    
+        $("#capaPrincipal").load(targetPage);
+    });
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "../app/controller/controladorLogin.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    /********************************** */
+    $("#bntCategoria a").on("click", function (e) {
+        e.preventDefault(); 
+        const targetPage = $(this).attr("href"); 
+    
+        $("#capaPrincipal").load(targetPage);
+    });
 
-            // Manejar la respuesta del servidor
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    console.log("Estado de la solicitud:", xhr.status); // Verifica el estado
-                    if (xhr.status == 200) {
-                        var response = xhr.responseText.trim();
-                        console.log("Respuesta del servidor:", response); // Muestra la respuesta exacta
+    $("#bntProductos a").on("click", function (e) {
+        e.preventDefault(); 
+        const targetPage = $(this).attr("href"); 
+    
+        $("#capaPrincipal").load(targetPage);
+    });
 
-                        if (response === "success") {
-                            console.log("Redirigiendo a vista principal...");
-                            window.location.href = "../app/views/vistaPrincipal.php"; 
-                        } else {
-                            alert(response); // Muestra el mensaje en caso de error
-                        }
-                    } else {
-                        alert("Error en la solicitud: " + xhr.status);
-                    }
+
+    /********************************** */
+    $('#enviarBtn').on('click', function (event) {
+        event.preventDefault();
+        enviarLogin();
+    });
+
+    $('.showFormButton').on('click', function () {
+        mostrarFormulario($(this).data('form'));
+    });
+
+
+
+
+
+
+    //Funciones
+    function enviarLogin() {
+        var usuario = $('#usuario').val();
+        var contrasena = $('#passw').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '../../app/controller/controladorLogin.php',
+            data: { usuario: usuario, contraseña: contrasena },
+            success: function (response) {
+                response = $.trim(response);
+                console.log("Respuesta del servidor:", response);
+
+                if (response === "success") {
+                    console.log("Redirigiendo a vista principal...");
+                    window.location.href = "../app/views/vistaPrincipal.php";
+                } else {
+                    alert(response);
                 }
-            };
-
-            xhr.send("usuario=" + encodeURIComponent(usuario) + "&contraseña=" + encodeURIComponent(contrasena)); // Envía los datos
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la solicitud:", status, error);
+                alert("Error en la solicitud: " + xhr.status);
+            }
         });
-    } else {
-        console.error("El botón de envío no se encontró en el DOM.");
     }
 
-    /// otro formulario 
-    const buttons = document.querySelectorAll(".showFormButton");
-    const forms = document.querySelectorAll(".form-container");
 
-    // Ocultar todos los formularios inicialmente
-    forms.forEach(form => {
-        form.style.display = "none";
-    });
+    function mostrarFormulario(formId) {
+        $('.form-container').hide();
+        $('#' + formId).show();
+    }
 
-    // Manejar el clic en cada botón
-    buttons.forEach(button => {
-        button.onclick = function() {
-            // Ocultar todos los formularios
-            forms.forEach(form => {
-                form.style.display = "none";
-            });
 
-            // Mostrar el formulario correspondiente
-            const formToShow = document.getElementById(button.dataset.form);
-            formToShow.style.display = "block";
-        }
-    });
+
+    $('.form-container').hide();
 });

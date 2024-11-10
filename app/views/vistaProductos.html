@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js"></script>
+    <style>
+        .card {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title">LISTA DE PRODUCTOS</h5>
+
+            <div class="col-5 text-start" style="margin-top: 1.75rem;">
+                <button class="btn btn-success rounded text-white" id="btn-Añadir" name="btn-buscar">AÑADIR
+                    PRODUCTOS</button>
+            </div>
+            <div class="table-responsive">
+                <table id="tablaProducto" class="table table-striped table-sm" width="100%" autocomplete="off">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>NOMBRE DEL PRODUCTO</th>
+                            <th>PRECIO</th>
+                            <th>CATEGORIA</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- modal de insertar nuevo producto-->
+    <div class="modal fade" tabindex="-1" id="modalNuevoProducto" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-white" id="titleCategoria">AGREGAR PRODUCTO</h5>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container bootstrap snippets bootdey">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="nombrePro" class="form-label">Nombre del Producto</label>
+                                <input id="nombrePro" type="text" class="form-control">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="precio" class="form-label">Precio</label>
+                                <input id="precio" type="text" class="form-control">
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <label for="tipoCategoria" class="form-label">Tipo de Categoría</label>
+                                <select id="tipoCategoria" class="form-select select2" style="width: 100%;">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal">CANCELAR</button>
+                    <button type="button" class="btn btn-success text-white" id="btnGuardarProducto"
+                        onclick="btnGuardarProducto()">GUARDAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(async function () {
+
+            tablaProducto = $('#tablaProducto').DataTable({
+                responsive: true, //para el signo de suma en responsi
+                searching: false, //busqueda desactivado
+                ordering: false, //orden desactivado
+                paging: false,
+                info: false,
+                "language": {
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla", //informacion vacia
+                    "sInfo": "_START_ al _END_ de _TOTAL_ registros",
+                    "infoEmpty": "Mostrando del 0 al 0 de 0 registros",
+                    "sLengthMenu": "",
+                    "oPaginate": {
+                        "sFirst": "Erste",
+                        "sPrevious": "Atrás",
+                        "sNext": "Siguiente",
+                        "sLast": "Letzte"
+                    },
+                    select: { rows: "" }
+                }
+            });
+
+            listarProducto(0);
+
+            $('#btn-Añadir').click(function () {
+                const modal = new bootstrap.Modal(document.getElementById('modalNuevoProducto'));
+                modal.show();
+                listarCategorias();
+            });
+
+
+        });
+
+        function listarProducto(idCategoria) {
+            $.ajax({
+                type: 'POST',
+                url: '/app/controller/controladorProducto.php',
+                data: {
+                    accion: 'listarProducto',
+                    idCategoria: idCategoria,
+                },
+                dataType: 'json',
+                success: function (resultado) {
+
+                    llenarTablaProductos(resultado.productos);
+
+                }, complete: function () {
+                }
+            });
+
+        }
+
+        function llenarTablaProductos(data) {
+            tablaProducto.clear().draw();
+            let row = 1;
+
+            $.each(data, function (index, ele) {
+                tablaProducto.row.add([
+                    row,
+                    ele.nombre,
+                    ele.precio,
+                    ele.tipCategoria
+                ]).draw(false);
+                row++;
+            });
+        }
+
+        function listarCategorias() {
+            $.ajax({
+                type: 'POST',
+                url: '/app/controller/controladorCategorias.php',
+                data: { accion: 'listarCategorias' },
+                dataType: 'json',
+                success: function (resultado) {
+                    llenarSelectBusqueda('tipoCategoria',resultado,'nombre','idCategoria');
+                }, complete: function () {
+                }
+            });
+
+        }
+
+        function llenarSelectBusqueda(id, data, texto, codigo) {
+            $('#' + id).empty();
+            $('#' + id).append($('<option/>', {
+                text: 'TODOS',
+                value: '0'
+            }));
+            data?.forEach(elemet => {
+                $('#' + id).append($('<option/>', {
+                    text: elemet[texto],
+                    value: elemet[codigo]
+                }));
+            });
+        }
+
+
+        function btnGuardarProducto() {
+            const descripcion = $('#nombrePro').val();
+            const precio = $('#precio').val();
+            const idcategoria = $('#tipoCategoria').val();
+           
+            if(idcategoria!=0){
+                GuardarProducto(descripcion, precio, idcategoria);
+                $('#nombrePro').val('');
+                $('#precio').val('');
+                $('#tipoCategoria').val(0);
+            }else{
+                msjFinal("2", "Elija una categoria valida");
+            }
+           
+
+            listarProducto(0);
+        }
+
+        function GuardarProducto(descripcion, precio, idcategoria) {
+            $.ajax({
+                type: 'POST',
+                url: '/app/controller/controladorProducto.php',
+                data: {
+                    accion: 'GuardarProducto',
+                    descripcion: descripcion,
+                    precio: precio,
+                    idcategoria : idcategoria
+                },
+                dataType: 'json',
+                success: function (resultado) {
+                    if (resultado.success) {
+                        msjFinal("1", "Categoría guardada con éxito.");
+                    } else {
+                        msjFinal("2", "Hubo un problema al guardar la categoría.");
+                    }
+                },
+                complete: function () {
+                }
+            });
+        }
+
+        function msjFinal(codMsj, desMsj) {
+            let icon = 'error';
+
+            if (codMsj == "1") {
+                icon = 'success';
+            } else if (codMsj == "2") {
+                icon = 'warning';
+            }
+
+            Swal.fire({
+                icon: icon,
+                text: desMsj,
+                showConfirmButton: false,
+                timer: (codMsj == "1") ? 3500 : undefined
+            });
+        }
+
+    </script>
+</body>
+
+</html>
