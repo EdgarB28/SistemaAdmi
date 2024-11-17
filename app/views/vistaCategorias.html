@@ -13,11 +13,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         .card {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
+        }
+
+        #tablaCategorias td {
+            text-align: center;
+            vertical-align: middle;
         }
     </style>
 
@@ -41,7 +48,8 @@
                             <th>N°</th>
                             <th>TIPO DE CATEGORIAS</th>
                             <th>DESCRIPCION</th>
-
+                            <th>ESTADO</th>
+                            <th>OPCIONES</th>
                         </tr>
                     </thead>
                 </table>
@@ -85,6 +93,33 @@
                     <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal">CANCELAR</button>
                     <button type="button" class="btn btn-success text-white" id="btnGuardarCategoria"
                         onclick="btnGuardarCategoria()">GUARDAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar -->
+    <div class="modal fade" tabindex="-1" id="modalActualizar" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-white" id="titleCategoria">EDITAR CATEGORIA</h5>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="w-100 mb-3">
+                            <label for="descripcionCategoria" class="form-label">Descripción</label>
+                            <textarea id="nuevaDescripcion" class="form-control" rows="4" placeholder="Ingrese una descripción"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal">CANCELAR</button>
+                    <button type="button" class="btn btn-success text-white" id="btnGuardarDescripcion"
+                     onclick="btnEditarDescripcion()"  >GUARDAR</button>
                 </div>
             </div>
         </div>
@@ -152,6 +187,8 @@
                 const modal = new bootstrap.Modal(document.getElementById('modalNuevaCategoria'));
                 modal.show();
             });
+
+
         });
 
         function msjFinal(codMsj, desMsj) {
@@ -192,16 +229,36 @@
 
         function llenarTablaCategorias(data) {
             tablaCategorias.clear().draw();
+            let colorEstado = '';
 
             $.each(data, function (index, ele) {
+
+                if (ele?.estado == 'ACTIVO') {
+                    colorEstado = "bg-success text-white p-1 rounded-3";
+                } else {
+                    colorEstado = "bg-danger text-white p-1 rounded-3";
+                }
+
                 tablaCategorias.row.add([
                     ele.idCategoria,
                     ele.nombre,
-                    ele.descripcion
+                    ele.descripcion,
+                    "<span class=\" " + colorEstado + "\">" + ele?.estado + "</span>",
+                    `<a class="pe-1" href="#" title="ACTUALIZAR CATEGORIA"  onclick ="abriModalActualizar('${ele?.idCategoria}')" > <i class="fa-solid fa-pen" ></i></a>` +
+                    `<a class="pe-1" href="#" title="ELIMINAR CATEGORIA" onclick="confirmarBajaCategoria('${ele?.idCategoria}')"><i class="fa-solid fa-trash text-danger"></i></a>`
+
                 ]).draw(false);
             });
         }
 
+        let idCategoriaSeleccionada =null;
+
+        function abriModalActualizar(idCategoria){
+            idCategoriaSeleccionada = idCategoria;
+            const modal = new bootstrap.Modal(document.getElementById('modalActualizar'));
+            modal.show();
+
+        }
 
         function btnGuardarCategoria() {
             const nombre = $('#nombreCat').val();
@@ -210,6 +267,37 @@
             GuardarCategoria(nombre, descripcion);
 
             listarCategorias();
+        }
+
+        function btnEditarDescripcion(){
+            const descripcion = $('#nuevaDescripcion').val();
+
+            EditarDescripcion(descripcion, idCategoriaSeleccionada);
+
+            listarCategorias();
+        }
+
+        function EditarDescripcion(descripcion , idCategoria){
+            $.ajax({
+                type: 'POST',
+                url: '/app/controller/controladorCategorias.php',
+                data: {
+                    accion: 'editarDescripcion',
+                    idCategoria: idCategoria,
+                    descripcion: descripcion
+                },
+                dataType: 'json',
+                success: function (resultado) {
+                    if (resultado.success) {
+                        msjFinal("1", "EJECUTADO CON EXITO.");
+                    } else {
+                        msjFinal("2", "HUBO UN PROBLEMA.");
+                    }
+                },
+                complete: function () {
+                }
+            });
+            
         }
 
         function GuardarCategoria(nombre, descripcion) {
@@ -233,6 +321,46 @@
                 }
             });
         }
+
+        async function confirmarBajaCategoria(idCategoria) {
+            Swal.fire({
+                title: '',
+                text: "ESTA SEGURO DE DESACTIVAR LA CATEGORIA?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#48C28D',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'CONTINUAR',
+                cancelButtonText: 'CANCELAR'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    bajaCategoria(idCategoria);
+                }
+            });
+        }
+
+        function bajaCategoria(idCategoria) {
+            $.ajax({
+                type: 'POST',
+                url: '/app/controller/controladorCategorias.php',
+                data: {
+                    accion: 'BajaCategoria',
+                    idCategoria: idCategoria
+                },
+                dataType: 'json',
+                success: function (resultado) {
+                    if (resultado.success) {
+                        msjFinal("1", "EJECUTADO CON EXITO.");
+                    } else {
+                        msjFinal("2", "HUBO UN PROBLEMA.");
+                    }
+                },
+                complete: function () {
+                }
+            });
+        }
+
+
 
 
     </script>

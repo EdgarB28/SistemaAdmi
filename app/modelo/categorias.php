@@ -3,12 +3,14 @@ class Categoria {
     private $idCategoria;
     private $nombre;
     private $descripcion;
+    private $estado;
 
   
-    public function __construct($idCategoria, $nombre, $descripcion) {
+    public function __construct($idCategoria, $nombre, $descripcion,$estado) {
         $this->idCategoria = $idCategoria;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
+        $this->estado = $estado;
     }
 
    
@@ -16,8 +18,17 @@ class Categoria {
         return [
             'idCategoria' => $this->idCategoria,
             'nombre' => $this->nombre,
-            'descripcion' => $this->descripcion
+            'descripcion' => $this->descripcion,
+            'estado'=>$this->estado
         ];
+    }
+
+    public function getestado(){
+        return $this->estado;
+    }
+
+    public function setestado($estado){
+        $this->estado = $estado;
     }
 
     public function getIdCategoria() {

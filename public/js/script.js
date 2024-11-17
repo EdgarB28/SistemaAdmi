@@ -26,6 +26,19 @@ $(document).ready(function () {
         $("#capaPrincipal").load(targetPage);
     });
 
+    $("#reporteVentas a").on("click", function (e) {
+        e.preventDefault(); 
+        const targetPage = $(this).attr("href"); 
+    
+        $("#capaPrincipal").load(targetPage);
+    });
+
+    $("#reporteProductos a").on("click", function (e) {
+        e.preventDefault(); 
+        const targetPage = $(this).attr("href"); 
+    
+        $("#capaPrincipal").load(targetPage);
+    });
 
     /********************************** */
     $('#enviarBtn').on('click', function (event) {

@@ -29,35 +29,35 @@
                 <li id="bntPerfil" class="sidebar-link">
                     <a href="vistaPerfil.html" class="sidebar-link">
                         <i class="lni lni-user"></i>
-                        <span>Perfil</span>
+                        <span>PERFIL</span>
                     </a>
                 </li>
                 <li id="bntCategoria" class="sidebar-item">
                     <a href="vistaCategorias.html" class="sidebar-link">
                         <i class="lni lni-agenda"></i>
-                        <span>Categorias</span>
+                        <span>CATEGORIAS</span>
                     </a>
                 </li>
                 <li id="bntProductos" class="sidebar-item">
                     <a href="vistaProductos.html" class="sidebar-link">
                         <i class="lni lni-agenda"></i>
-                        <span>Productos</span>
+                        <span>PRODUCTOS</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                 <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
                         <i class="lni lni-layout"></i>
-                    <span>Multi Level</span>
-                </a>
+                    <span>REPORTES</span>
+                 </a>
                     <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
-                    <li class="sidebar-item">
-                <a href="#" class="sidebar-link">Link 1</a>
-                     </li>
-                         <li class="sidebar-item">
-                     <a href="#" class="sidebar-link">Link 2</a>
-                     </li>
-                        </ul>
+                        <li id="reporteVentas" class="sidebar-item">
+                        <a href="vistaReporteVentas.html" class="sidebar-link">VENTAS</a>
+                        </li>
+                         <li id="reporteProductos" class="sidebar-item">
+                        <a href="vistaReporteProducto.html" class="sidebar-link">PRODUCTOS</a>
+                        </li>
+                     </ul>
                 </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">

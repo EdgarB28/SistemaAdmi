@@ -11,11 +11,12 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js"></script>
     <style>
         .card {
-            max-width: 800px;
+            max-width: 900px;
             margin: 20px auto;
             padding: 20px;
         }
@@ -28,13 +29,41 @@
     <div class="card">
 
         <div class="card-body">
-            <h5 class="card-title">LISTA DE PRODUCTOS</h5>
+            <div class="row d-flex justify-content-center">
+                <div class="col-2 col-sm-3">
+                    <label for="selectCategoria">CATEGORÍA</label>
+                    <select id="selectCategoria" name="selectCategoria" class="form-control rounded-lg text-dark">
+                    </select>
+                </div>
 
-            <div class="col-5 text-start" style="margin-top: 1.75rem;">
-                <button class="btn btn-success rounded text-white" id="btn-Añadir" name="btn-buscar">AÑADIR
-                    PRODUCTOS</button>
+                <div class="col-2 col-sm-3">
+                    <label for="precioPro">PRECIO</label>
+                    <input id="precioPro" type="text" class="form-control">
+                </div>
+
+
+                <div class="col-4 d-flex align-items-end" style="margin-top: 1.75rem;">
+
+                    <button class="btn btn-primary rounded text-white" id="btn-buscar" name="btn-buscar">
+                        <i class="fa-solid fa-search"></i>BUSCAR
+                    </button>
+
+
+                    <button class="btn btn-danger rounded text-white ms-2" id="btn-borrar" name="btn-borrar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+
+                <div class="col-2 d-flex align-items-end" style="margin-top: 1.75rem;">
+                    <button class="btn btn-success rounded text-white w-100" id="btn-Añadir" name="btn-Añadir">
+                        AÑADIR
+                    </button>
+                </div>
             </div>
-            <div class="table-responsive">
+
+            <h5 class="card-title mt-4">LISTA DE PRODUCTOS</h5>
+            <div class="table-responsive ">
                 <table id="tablaProducto" class="table table-striped table-sm" width="100%" autocomplete="off">
                     <thead>
                         <tr>
@@ -42,6 +71,7 @@
                             <th>NOMBRE DEL PRODUCTO</th>
                             <th>PRECIO</th>
                             <th>CATEGORIA</th>
+                            <th>OPCIONES</th>
                         </tr>
                     </thead>
                 </table>
@@ -94,6 +124,42 @@
         </div>
     </div>
 
+    <!-- modal actualizar producto-->
+    <div class="modal fade" tabindex="-1" id="modalActualizar" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-white" id="titleCategoria">EDITAR PRODUCTO</h5>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="colum">
+                                <label id="lblNombreProducto" class="form-label ">PRODUCTO</label>
+
+                                <label for="precioProducto" class="form-label">PRECIO</label>
+                                <input id="precioProducto" type="number" class="form-control" min="0" step="1.00">
+
+                                <label for="descripcionCategoria" class="form-label">CATEGORIA</label>
+                                <select id="selectCateg" class="form-select select2" style="width: 100%;">
+                                </select>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal">CANCELAR</button>
+                    <button type="button" class="btn btn-success text-white" id="btnGuardarDescripcion"
+                        onclick="actualizarProducto()">ACTUALIZAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -125,24 +191,39 @@
                 }
             });
 
-            listarProducto(0);
+            listarProducto(0, 0);
+            listarCategorias();
 
             $('#btn-Añadir').click(function () {
                 const modal = new bootstrap.Modal(document.getElementById('modalNuevoProducto'));
                 modal.show();
-                listarCategorias();
             });
+
+            $('#btn-buscar').click(function () {
+                const idCategoria = $('#selectCategoria').val() || 0;
+                const monto = $('#precioPro').val() || 0;
+                listarProducto(idCategoria, monto);
+            });
+
+            $('#btn-borrar').click(function () {
+                $('#selectCategoria').val(0);
+                $('#precioPro').val('');
+                listarProducto(0, 0);
+            });
+
+
 
 
         });
 
-        function listarProducto(idCategoria) {
+        function listarProducto(idCategoria, monto) {
             $.ajax({
                 type: 'POST',
                 url: '/app/controller/controladorProducto.php',
                 data: {
                     accion: 'listarProducto',
                     idCategoria: idCategoria,
+                    monto: monto,
                 },
                 dataType: 'json',
                 success: function (resultado) {
@@ -164,7 +245,9 @@
                     row,
                     ele.nombre,
                     ele.precio,
-                    ele.tipCategoria
+                    ele.tipCategoria,
+                    `<a class="pe-1" href="#" title="ACTUALIZAR PRODUCTO"  onclick ="abrirModalActualizar('${ele?.idProducto}', '${ele?.idCategoria}')" > <i class="fa-solid fa-pen" ></i></a>` +
+                    `<a class="pe-1" href="#" title="ELIMINAR PRODUCTO" onclick="confirmarBajaProducto('${ele?.idProducto}')"><i class="fa-solid fa-trash text-danger"></i></a>`
                 ]).draw(false);
                 row++;
             });
@@ -177,7 +260,9 @@
                 data: { accion: 'listarCategorias' },
                 dataType: 'json',
                 success: function (resultado) {
-                    llenarSelectBusqueda('tipoCategoria',resultado,'nombre','idCategoria');
+                    llenarSelectBusqueda('tipoCategoria', resultado, 'nombre', 'idCategoria');
+                    llenarSelectBusqueda('selectCategoria', resultado, 'nombre', 'idCategoria');
+                    llenarSelectBusqueda('selectCateg', resultado, 'nombre', 'idCategoria');
                 }, complete: function () {
                 }
             });
@@ -198,21 +283,20 @@
             });
         }
 
-
         function btnGuardarProducto() {
             const descripcion = $('#nombrePro').val();
             const precio = $('#precio').val();
             const idcategoria = $('#tipoCategoria').val();
-           
-            if(idcategoria!=0){
+
+            if (idcategoria != 0) {
                 GuardarProducto(descripcion, precio, idcategoria);
                 $('#nombrePro').val('');
                 $('#precio').val('');
                 $('#tipoCategoria').val(0);
-            }else{
+            } else {
                 msjFinal("2", "Elija una categoria valida");
             }
-           
+
 
             listarProducto(0);
         }
@@ -225,7 +309,7 @@
                     accion: 'GuardarProducto',
                     descripcion: descripcion,
                     precio: precio,
-                    idcategoria : idcategoria
+                    idcategoria: idcategoria
                 },
                 dataType: 'json',
                 success: function (resultado) {
@@ -254,6 +338,94 @@
                 text: desMsj,
                 showConfirmButton: false,
                 timer: (codMsj == "1") ? 3500 : undefined
+            });
+        }
+
+        async function confirmarBajaProducto(idProducto) {
+            Swal.fire({
+                title: '',
+                text: "ESTA SEGURO DE DESACTIVAR LA CATEGORIA?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#48C28D',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'CONTINUAR',
+                cancelButtonText: 'CANCELAR'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    bajaProducto(idProducto);
+                    listarProducto(0, 0);
+                }
+            });
+        }
+
+        function bajaProducto(idProducto) {
+            $.ajax({
+                type: 'POST',
+                url: '/app/controller/controladorProducto.php',
+                data: {
+                    accion: 'bajaProducto',
+                    idProducto: idProducto
+                },
+                dataType: 'json',
+                success: function (resultado) {
+                    if (resultado.success) {
+                        msjFinal("1", "EJECUTADO CON EXITO.");
+                    } else {
+                        msjFinal("2", "HUBO UN PROBLEMA.");
+                    }
+                },
+                complete: function () {
+                }
+            });
+        }
+
+        let idProductoSeleccionada = null;
+
+        function abrirModalActualizar(idProducto, idcategoria) {
+            const modal = new bootstrap.Modal(document.getElementById('modalActualizar'));
+            modal.show();
+            $('#precioProducto').val('');
+
+
+            idProductoSeleccionada = idProducto;
+
+            $('#selectCateg').val(idcategoria);
+
+        }
+
+        function actualizarProducto() {
+            const idcategoria = $('#selectCateg').val();
+            const precio = $('#precioProducto').val();
+
+            console.log(idcategoria);
+            console.log(precio);
+            console.log(idProductoSeleccionada);
+
+            editarProducto(idcategoria, precio, idProductoSeleccionada);
+            listarProducto(0, 0);
+        }
+
+        function editarProducto(idCategoria, precio, idProducto) {
+            $.ajax({
+                type: 'POST',
+                url: '/app/controller/controladorProducto.php',
+                data: {
+                    accion: 'editarProducto',
+                    idCategoria: idCategoria,
+                    precio: precio,
+                    idProducto: idProducto
+                },
+                dataType: 'json',
+                success: function (resultado) {
+                    if (resultado.success) {
+                        msjFinal("1", "Categoría guardada con éxito.");
+                    } else {
+                        msjFinal("2", "Hubo un problema al guardar la categoría.");
+                    }
+                },
+                complete: function () {
+                }
             });
         }
 

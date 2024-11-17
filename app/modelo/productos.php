@@ -4,23 +4,49 @@ class productos {
     private $nombre;
     private $precio;
     private $tipCategoria;
+    private $cantidad;
+    private $idCategoria;
 
   
-    public function __construct($idProducto, $nombre,$precio,  $tipCategoria) {
+    public function __construct($idProducto, $nombre,$precio,  $tipCategoria = null,$cantidad=null,$idCategoria=null) {
         $this->idProducto = $idProducto;
         $this->nombre = $nombre;
         $this->precio =$precio;
         $this->tipCategoria = $tipCategoria;
+        $this->cantidad = $cantidad;
+        $this->idCategoria = $idCategoria;
     }
 
    
     public function toArray() {
-        return [
+        $data = [
             'idProducto' => $this->idProducto,
             'nombre' => $this->nombre,
-            'precio' => $this->precio,
-            'tipCategoria' => $this->tipCategoria
+            'precio' => $this->precio
         ];
+
+        // Solo incluir si los atributos no son null
+        if ($this->tipCategoria !== null) {
+            $data['tipCategoria'] = $this->tipCategoria;
+        }
+
+        if ($this->cantidad !== null) {
+            $data['cantidad'] = $this->cantidad;
+        }
+        
+        if($this->idCategoria !==null){
+            $data['idCategoria'] = $this->idCategoria;
+        }
+
+        return $data;
+    }
+
+    public function getCantidad(){
+        return $this->cantidad;
+    }
+
+    public function setCantidad(){
+        $this->cantidad = $cantidad;
     }
 
     public function getidProducto() {
