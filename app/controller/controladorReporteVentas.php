@@ -30,7 +30,7 @@ INNER JOIN LOCALES  ON LOCALES.ID_LOCAL = C.ID_LOCAL;
 
     // Recorre los resultados
     while ($row = $result->fetch_assoc()) {
-        $venta = new ventas($row['FECHA'], $row['COLABORADOR'], $row['CANTIDAD'], $row['TOTAL'],$row['DESCRIPCION'],$row['LOCAL'],$row['ESTADO']);
+        $venta = new ventas($row['FECHA'], $row['COLABORADOR'], (int)$row['CANTIDAD'], $row['TOTAL'],$row['DESCRIPCION'],$row['LOCAL'],$row['ESTADO']);
         $ventas[] = $venta;
     }
 

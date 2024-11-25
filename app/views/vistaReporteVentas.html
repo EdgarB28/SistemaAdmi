@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
         .card {
             max-width: 110%;
@@ -53,6 +54,8 @@
             </div>
 
         </div>
+
+        <div id="chart_div" style="width: 640px; height: 500px;"></div>
 
     </div>
 
@@ -106,6 +109,7 @@
 
     <script>
         $(document).ready(async function () {
+            google.charts.load('current', { packages: ['corechart', 'line'] });
 
             tablaReporteVentas = $('#tablaReporteVentas').DataTable({
                 responsive: true, //para el signo de suma en responsi
@@ -129,16 +133,48 @@
                 }
             });
 
-            listarVentas();
 
-           /* $('#btn-Añadir').click(function () {
-                const modal = new bootstrap.Modal(document.getElementById('modalNuevoProducto'));
-                modal.show();
-                listarCategorias();
-            });*/
+            google.charts.setOnLoadCallback(listarVentas);
+
+            /* $('#btn-Añadir').click(function () {
+                 const modal = new bootstrap.Modal(document.getElementById('modalNuevoProducto'));
+                 modal.show();
+                 listarCategorias();
+             });*/
 
 
         });
+
+
+
+        function drawCurveTypes(resultado) {
+            console.log(resultado);
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Fecha');
+            data.addColumn('number', 'Cantidad');
+
+            var rows = resultado.map(function (item) {
+                return [item.fecCompra, item.cantidad];  
+            });
+
+            data.addRows(rows);
+
+            var options = {
+                title: 'VENTAS POR FECHA',
+                hAxis: {
+                    title: 'Fecha'
+                },
+                vAxis: {
+                    title: 'CANTIDAD DE PLATOS'
+                },
+                curveType: 'function',  // Esto hace que la curva sea suave
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
 
         function listarVentas() {
             $.ajax({
@@ -151,6 +187,7 @@
                 success: function (resultado) {
 
                     llenarTablaReporteVentas(resultado);
+                    drawCurveTypes(resultado);
 
                 }, complete: function () {
                 }

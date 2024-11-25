@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
         .card {
             max-width: 70%;
@@ -49,8 +50,12 @@
             </div>
 
         </div>
-
+        <div id="piechart" style="width: 640px; height: 500px;"></div>
     </div>
+
+
+
+
 
 
     <!-- modal de insertar nuevo producto-->
@@ -103,6 +108,9 @@
     <script>
         $(document).ready(async function () {
 
+            google.charts.load('current', { 'packages': ['corechart'] });
+
+
             tablaReporteProducto = $('#tablaReporteProducto').DataTable({
                 responsive: true, //para el signo de suma en responsi
                 searching: false, //busqueda desactivado
@@ -125,16 +133,37 @@
                 }
             });
 
-            listarVentasProductos();
 
-           /* $('#btn-Añadir').click(function () {
-                const modal = new bootstrap.Modal(document.getElementById('modalNuevoProducto'));
-                modal.show();
-                listarCategorias();
-            });*/
+            google.charts.setOnLoadCallback(listarVentasProductos);
+
+            /* $('#btn-Añadir').click(function () {
+                 const modal = new bootstrap.Modal(document.getElementById('modalNuevoProducto'));
+                 modal.show();
+                 listarCategorias();
+             });*/
 
 
         });
+
+
+        function drawChart(data) {
+
+            const dataArray = [['Producto', 'Cantidad']];
+
+            data.forEach(item => {
+                dataArray.push([item.nombre, Number(item.cantidad)]);  
+            });
+
+            const dataTable = google.visualization.arrayToDataTable(dataArray);
+
+            var options = {
+                title: 'REPORTE DE PRODUCTOS POR CANTIDAD'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(dataTable, options);
+        }
 
         function listarVentasProductos() {
             $.ajax({
@@ -147,6 +176,7 @@
                 success: function (resultado) {
 
                     llenarTablaReporteProducto(resultado);
+                    drawChart(resultado);
 
                 }, complete: function () {
                 }

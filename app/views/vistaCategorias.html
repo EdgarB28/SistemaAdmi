@@ -135,6 +135,8 @@
 
     <script>
         $(document).ready(async function () {
+            let idCategoriaSeleccionada =null;
+            
             tablaCategorias = $('#tablaCategorias').DataTable({
                 responsive: true, //para el signo de suma en responsi
                 searching: false, //busqueda desactivado
@@ -251,7 +253,7 @@
             });
         }
 
-        let idCategoriaSeleccionada =null;
+        
 
         function abriModalActualizar(idCategoria){
             idCategoriaSeleccionada = idCategoria;
