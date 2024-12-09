@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="/app/css/styles.css">
+
+   
     
   </head>
 
@@ -27,19 +29,19 @@
             </div>
             <ul class="sidebar-nav">
                 <li id="bntPerfil" class="sidebar-link">
-                    <a href="vistaPerfil.html" class="sidebar-link">
+                    <a href="vistasAdministrador/vistaPerfil.html" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>PERFIL</span>
                     </a>
                 </li>
                 <li id="bntCategoria" class="sidebar-item">
-                    <a href="vistaCategorias.html" class="sidebar-link">
+                    <a href="vistasAdministrador/vistaCategorias.html" class="sidebar-link">
                         <i class="lni lni-agenda"></i>
                         <span>CATEGORIAS</span>
                     </a>
                 </li>
                 <li id="bntProductos" class="sidebar-item">
-                    <a href="vistaProductos.html" class="sidebar-link">
+                    <a href="vistasAdministrador/vistaProductos.html" class="sidebar-link">
                         <i class="lni lni-agenda"></i>
                         <span>PRODUCTOS</span>
                     </a>
@@ -52,17 +54,17 @@
                  </a>
                     <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
                         <li id="reporteVentas" class="sidebar-item">
-                        <a href="vistaReporteVentas.html" class="sidebar-link">VENTAS</a>
+                        <a href="vistasAdministrador/vistaReporteVentas.html" class="sidebar-link">VENTAS</a>
                         </li>
                          <li id="reporteProductos" class="sidebar-item">
-                        <a href="vistaReporteProducto.html" class="sidebar-link">PRODUCTOS</a>
+                        <a href="vistasAdministrador/vistaReporteProducto.html" class="sidebar-link">PRODUCTOS</a>
                         </li>
                      </ul>
                 </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                <li id="bntPedidos" class="sidebar-item">
+                    <a href="vistasAdministrador/vistaPedidos.html" class="sidebar-link">
                         <i class="lni lni-popup"></i>
-                        <span>Notification</span>
+                        <span>PEDIDOS</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -82,7 +84,7 @@
         <div id="capaPrincipal" class="main p-3">
             <div class="text-center">
                 <h1>
-                    Sidebar Bootstrap 5
+                    BIENVENIDO NUEVAMENTE
                 </h1>
             </div>
         </div>

@@ -32,7 +32,7 @@
             <h5 class="card-title">REPORTE DE PRODUCTOS VENDIDOS</h5>
 
             <div class="col-5 text-start" style="margin-top: 1.75rem;">
-                <button class="btn btn-success rounded text-white" id="btn-Añadir" name="btn-buscar">GENERAR
+                <button class="btn btn-success rounded text-white" id="btn-generarReporte" name="btn-buscar">GENERAR
                     REPORTE</button>
             </div>
             <div class="table-responsive">
@@ -136,6 +136,9 @@
 
             google.charts.setOnLoadCallback(listarVentasProductos);
 
+            $('#btn-generarReporte').click(function () {
+                window.location.href = "../reportes/GenerarExcel.php";
+            });
             /* $('#btn-Añadir').click(function () {
                  const modal = new bootstrap.Modal(document.getElementById('modalNuevoProducto'));
                  modal.show();
@@ -151,7 +154,7 @@
             const dataArray = [['Producto', 'Cantidad']];
 
             data.forEach(item => {
-                dataArray.push([item.nombre, Number(item.cantidad)]);  
+                dataArray.push([item.nombre, Number(item.cantidad)]);
             });
 
             const dataTable = google.visualization.arrayToDataTable(dataArray);

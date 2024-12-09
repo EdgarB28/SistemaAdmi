@@ -1,0 +1,307 @@
+body {
+    margin: 0; /* Elimina el margen por defecto */
+    background-image: url(../img/cabe.png); /* Cambia a la ruta de tu imagen */
+    background-size: cover; /* Cubre todo el espacio disponible */
+    background-repeat: no-repeat; /* No repite la imagen */
+    background-position: center; /* Centra la imagen en el fondo */
+    height: 100%;
+    color: #ffffff;
+}
+
+.header {
+    position: fixed;
+    background-image: url(../img/cabe.png);
+    display: flex; /* Usamos flexbox para alinear elementos */
+    justify-content: space-between; /* Espacio entre el login y el menú */
+    align-items: center; /* Centra verticalmente */
+    padding: 10px 20px; /* Espaciado interno */
+    border-bottom: 2px solid #000000; /* Línea inferior */
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Asegura que el encabezado esté por encima de otros elementos */
+    top: 0; /* Posición en la parte superior */
+    left: 0; /* Alinea a la izquierda */
+    right: 0; /* Alinea a la derecha */
+}
+
+.login-button {
+    padding: 10px 15px; /* Espaciado interno del botón */
+    background-color: #c83f46; /* Color de fondo del botón */
+    color: rgb(0, 0, 0); /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    font-weight: 600;
+    font-size: 20px;    
+}
+
+.login-button:hover {
+    color: rgb(255, 255, 255); /* Cambia color del texto */
+}
+
+.navbar {
+    display: flex; /* Alinea los menús en una fila */
+    flex-grow: 1; /* Ocupa el espacio restante */
+    justify-content: center; /* Centrar botones */
+    gap: 80px; /* Espacio entre botones */
+}
+
+.nav-button {
+    margin-left: 15px; /* Espacio entre los botones */
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: transparent; /* Fondo transparente */
+    border: 0;
+    color: #ffffff; /* Color del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave */
+    font-weight: 600;
+    font-size: 20px;
+    text-decoration: none;      
+}
+
+.nav-button:hover {
+    color: #c83f46; /* Cambia color del texto */
+}
+
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se ajusten en varias filas */
+    justify-content: center; /* Centra las tarjetas en la página */
+    padding: 20px;
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+.card-horizontal {
+    display: flex; /* Para alinear la imagen y el contenido horizontalmente */
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 40px; /* Espacio entre tarjetas */
+    width: calc(33.33% + 20px); /* Tres columnas */
+    height: 200px; /* Altura fija para las tarjetas */
+    position: relative; /* Para posicionar el botón de forma absoluta */
+    box-sizing: border-box; /* Incluye el padding y border en el width */
+    
+}
+
+.card-horizontal img {
+    width: 200px; /* Ancho fijo para la imagen */
+    height: auto; /* Mantiene la proporción */
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.card-content {
+
+    flex: 1; /* Permite que el contenido ocupe el espacio restante */
+    margin-left: 15px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column; /* Coloca elementos verticalmente */
+    justify-content: space-between; /* Distribuye espacio entre elementos */
+    overflow: hidden; /* Evita que el contenido se desborde */
+}
+.card-content h3 {
+    margin: 10px 0; /* Espacio arriba y abajo del título */
+}
+
+.card-content p {
+    margin: 10px 0; /* Espacio arriba y abajo de la descripción */
+}
+.price {
+   font-weight: bold; /* Hace que el precio sea más destacado */
+    margin-top: auto; /* Asegura que el precio esté al final del contenido */
+    margin: 5px 0; /* Espacio arriba y abajo del precio */
+
+}
+
+.aña-button {
+    position: absolute; /* Para que se posicione en la esquina */
+    bottom: 10px; /* Espaciado desde abajo */
+    right: 10px; /* Espaciado desde la derecha */
+    padding: 10px 15px;
+    background-color: #c83f46;
+    color: #000000;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    
+}
+
+.aña-button:hover {
+    background-color: #fbff00; /* Color de fondo al pasar el ratón */
+}
+
+@media (max-width: 768px) {
+    .card-horizontal {
+        width: calc(50% - 20px); /* Dos columnas en pantallas medianas */
+    }
+}
+
+@media (max-width: 480px) {
+    .card-horizontal {
+        width: 100%; /* Una columna en pantallas pequeñas */
+    }
+}
+
+
+
+.remove-button{
+    border-radius: 100px ;
+    color: rgb(0, 0, 0);
+    text-align: center;
+ background-color: red;
+ border-color: #000000;
+}
+
+
+#cart {
+    position: fixed;
+    top: 65px;
+    right: -600px; /* Fuera de la pantalla inicialmente */
+    width: 500px;
+    height: 600px;
+    background-color: rgb(49, 48, 48);
+    border: 1px solid #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    transition: right 0.5s ease; /* Transición suave */
+    padding: 20px;
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+    
+    background-image: url(../img/cabe.png);
+}
+
+.cart-visible {
+    left: 767px; /* Muestra el carrito */
+}
+
+.cart-hidden {
+    right: 200px; /* Oculta el carrito */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(197, 197, 197, 0.5);
+    display: none; /* Oculta la superposición inicialmente */
+    z-index: 999; /* Asegúrate de que esté por debajo del carrito */
+}
+
+
+
+/* CARRITO */
+#cart-items {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    justify-content: space-between;
+    padding: 15px; /* Espaciado interno */
+    border: 1px solid #444; /* Borde del platillo */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin-bottom: 10px; /* Espaciado entre platillos */
+    background-color: rgb(60, 60, 60); /* Color de fondo suave */
+    transition: transform 0.2s; /* Transición para efectos al pasar el mouse */
+}
+
+
+#cart-items li:hover {
+    transform: scale(1.02); /* Efecto al pasar el mouse */
+}
+
+#cart-items li img {
+    width: 100px; /* Asegúrate de que el ancho coincide con el script */
+    height: auto; /* Mantener la proporción de la imagen */
+    margin-right: 10px;
+}
+
+#cart-items li div {
+    flex-grow: 1; /* Para que ocupe el espacio restante */
+}
+
+#cart-items li span {
+    display: block; /* Asegura que el precio esté en su propia línea */
+}
+
+#cart-items li span:last-child {
+    margin-top: 5px; /* Espaciado entre el nombre y el precio */
+}
+
+/* Estilo para cada item del carrito */
+#cart-items li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    
+}
+
+
+/* Estilo para los botones */
+.ver-button, .remove-button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.ver-button:hover, .remove-button:hover {
+    background-color: #581111;
+}
+
+/* Estilo para el overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* Ocultar por defecto */
+    z-index: 999;
+}
+
+/* Mostrar el overlay cuando sea necesario */
+.overlay.visible {
+    display: block;
+}
+
+/* Estilo para el total en el carrito */
+#total-price {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Botón de cerrar el carrito */
+#close-cart {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#close-cart:hover {
+    background-color: #c82333;
+}
+
+
+
+

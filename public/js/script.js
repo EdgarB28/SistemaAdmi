@@ -40,6 +40,13 @@ $(document).ready(function () {
         $("#capaPrincipal").load(targetPage);
     });
 
+    $("#bntPedidos a").on("click", function (e) {
+        e.preventDefault(); 
+        const targetPage = $(this).attr("href"); 
+    
+        $("#capaPrincipal").load(targetPage);
+    });
+
     /********************************** */
     $('#enviarBtn').on('click', function (event) {
         event.preventDefault();
@@ -70,7 +77,7 @@ $(document).ready(function () {
 
                 if (response === "success") {
                     console.log("Redirigiendo a vista principal...");
-                    window.location.href = "../app/views/vistaPrincipal.php";
+                    window.location.href = "../views/vistaPrincipal.php";
                 } else {
                     alert(response);
                 }

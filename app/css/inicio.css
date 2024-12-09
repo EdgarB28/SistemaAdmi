@@ -1,0 +1,246 @@
+body {
+    margin: 0; /* Elimina el margen por defecto */
+    background-image: url(../img/cabe.png); /* Cambia a la ruta de tu imagen */
+    background-size: cover; /* Cubre todo el espacio disponible */
+    background-repeat: no-repeat; /* No repite la imagen */
+    background-position: center; /* Centra la imagen en el fondo */
+    height: 100%;
+  }
+  
+  .header {
+    position: fixed;
+    background-image: url(../img/cabe.png);
+    display: flex; /* Usamos flexbox para alinear elementos */
+    justify-content: space-between; /* Espacio entre el login y el menú */
+    align-items: center; /* Centra verticalmente */
+    padding: 10px 20px; /* Espaciado interno */
+    border-bottom: 2px solid #000000; /* Línea inferior */
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Asegura que el encabezado esté por encima de otros elementos */
+    top: 0; /* Posición en la parte superior */
+    left: 0; /* Alinea a la izquierda */
+    right: 0; /* Alinea a la derecha */
+  }
+  
+  .login-button {
+    padding: 10px 15px; /* Espaciado interno del botón */
+    background-color: #ff0800; /* Color de fondo del botón */
+    color: rgb(0, 0, 0); /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    font-weight: 600;
+    font-size: 20px;    
+  }
+  
+  .login-button:hover {
+    color: rgb(255, 255, 255); /* Cambia color del texto */
+  }
+  
+  .ver-button {
+    margin-top: auto; /* Empuja el botón al fondo */
+    padding: 10px 15px; /* Espaciado interno del botón */
+    background-color: #000000; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: 2px solid white; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave */
+    text-decoration: none;
+  }
+  
+  .ver-button:hover {
+    background-color: #5c5b5b; /* Color de fondo al pasar el ratón */
+  }
+  
+  .navbar {
+    display: flex; /* Alinea los menús en una fila */
+    flex-grow: 1; /* Ocupa el espacio restante */
+    justify-content: center; /* Centrar botones */
+    gap: 80px; /* Espacio entre botones */
+  }
+  
+  .nav-button {
+    margin-left: 15px; /* Espacio entre los botones */
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: transparent; /* Fondo transparente */
+    border: 0;
+    color: #ffffff; /* Color del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave */
+    font-weight: 600;
+    font-size: 20px;
+    text-decoration: none;      
+  }
+  
+  .nav-button:hover {
+    color: rgb(255, 0, 0); /* Cambia color del texto */
+  }
+  .container1 {
+    display: flex; /* Alinea el carrusel y las listas de redes sociales en una fila */
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center; /* Centra verticalmente */
+    width: 100%; /* Ancho completo */
+    margin-top: 45px;
+    background-image: url(../img/fondo.jpg);
+  }
+  
+  .social-list {
+    
+    width: 10%; /* Ancho de las listas de redes sociales */
+    display: flex; /* Usar flexbox para centrar los íconos */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    margin-left: 0;
+    margin-right: 0;
+    
+  }
+  
+  
+  .social-list ul {
+    list-style-type: none; /* Quita los puntos de la lista */
+    padding: 0; /* Quita el padding por defecto */
+    margin: 0; /* Quita el margen por defecto */
+    display: flex; /* Usa flexbox para alinear los íconos en fila */
+    flex-direction: column; /* Coloca los íconos en columna */
+  }
+  
+  .social-list li {
+    margin: 80px 0; /* Espaciado entre íconos */
+  }
+  
+  .social-list a {
+    text-decoration: none; /* Sin subrayado */
+    color: #000000; /* Color del enlace */
+    transition: color 0.3s; /* Transición suave */
+  }
+  
+  .social-list a:hover {
+    color: #bebebe; /* Color al pasar el ratón */
+  }
+  
+  .social-list i {
+    font-size: 40px; /* Tamaño del ícono */
+  
+  }
+  
+  
+  .social-list a:hover i {
+    color: #b8b8b8; /* Color al pasar el ratón sobre el ícono */
+  }
+  
+  .carousel {
+  
+    position: relative;
+    width: 80%; /* Ancho del carrusel */
+    margin: 0 auto; /* Centra el carrusel */
+    overflow: hidden; /* Oculta las imágenes que se salen del contenedor */
+  }
+  
+  .carousel-images {
+    display: flex; /* Alinea las imágenes en fila */
+    transition: transform 0.5s ease; /* Transición suave al mover las imágenes */
+  }
+  
+  .carousel-images img {
+    width: 100%; /* Ocupa el 100% del ancho del contenedor */
+    height: 750px; /* Ajusta la altura deseada para todas las imágenes */
+    object-fit: cover; /* Mantiene la proporción y cubre el contenedor */
+    flex: 0 0 auto; /* Asegura que las imágenes mantengan su tamaño */
+  }
+  button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10; /* Asegura que los botones estén por encima de las imágenes */
+  }
+  
+  .prev {
+    left: 10px; /* Botón anterior */
+  }
+  
+  .next {
+    right: 10px; /* Botón siguiente */
+  }
+  
+  
+  /*PARA LAS CARD*/
+  h1{
+    text-align: center; /* Centra el texto */
+    margin: 100px 0;
+    color: #fff;
+    font-weight: 700;
+    font-size: 40px;
+    font-family: fantasy;
+     }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+  }
+  
+  .card {
+    background-color: #000000da;
+    border: 1px solid #000000;
+    border-radius: 17px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 0; /* Elimina padding de la card */
+    width: 240px; /* Ancho fijo, puedes ajustarlo */
+    text-align: center;
+    overflow: hidden; /* Asegura que el border-radius funcione correctamente */
+    border-radius: 10px;
+    height: 330px; /* Altura fija para todas las cards, ajusta según sea necesario */
+    color: #fff;
+  }
+  
+  .card img {
+    width: 100%; /* La imagen ocupa todo el ancho de la card */
+    height: 150px; /* Mantiene la proporción de la imagen */
+    display: block; /* Elimina espacio debajo de la imagen */
+    border-radius: 10px 10px 0 0; /* Bordes redondeados solo en la parte superior de la imagen */
+  }
+  
+  .card-content {
+    padding: 15px; /* Espaciado interno para el contenido de la card */
+  }
+  
+  .stars {
+    display: flex; /* Alinea las estrellas en una fila */
+    justify-content: center; /* Centra las estrellas */
+    margin: 30px 0; /* Espaciado arriba y abajo */
+  }
+  
+  .star {
+    color: #FFD700; /* Color dorado para las estrellas */
+    font-size: 20px; /* Tamaño de la estrella, ajusta según sea necesario */
+  }
+  .aña-button {
+    margin-top: auto; /* Empuja el botón al fondo */
+    padding: 10px 15px; /* Espaciado interno del botón */
+    background-color: #000000; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: 2px solid white; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave */
+    text-decoration: none;
+  }
+  
+  .aña-button:hover {
+    background-color: #5c5b5b; /* Color de fondo al pasar el ratón */
+  }
+  @media (max-width: 768px) {
+    .card {
+        width: 100%; /* Las tarjetas ocupan todo el ancho en pantallas pequeñas */
+    }
+  }

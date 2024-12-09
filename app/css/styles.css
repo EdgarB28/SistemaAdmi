@@ -157,8 +157,9 @@ header {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;;
 }
+
 
 li {
     list-style: none;
