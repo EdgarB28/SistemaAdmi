@@ -34,7 +34,6 @@
         </div>
     </div>
 </section>
-<!-- <script src="js/scripts.js"></script> Enlaza tu JavaScript -->
 
 
 <section id="seccion2">
@@ -42,34 +41,62 @@
 
     <h1>NUESTRAS MEJORES CATEGORÍAS</h1>
     <div class="container">
-
-        <?php
-        // Array de datos para las tarjetas
-        $cards = [
-            ['title' => 'Comida Criolla',  'image' => '../app/img/criolla.png', 'url' => '../app/views/vistasUsuario/criollo.php'],
-            ['title' => 'Comida de la Selva', 'image' => '../app/img/selva.png', 'url' => '../app/views/vistasUsuario/selva.php'],
-            ['title' => 'Comida Andina',  'image' => '../app/img/andina.png', 'url' => '../app/views/vistasUsuario/andina.php'],
-            ['title' => 'Comida Marina', 'image' => '../app/img/marina.png', 'url' => '../app/views/vistasUsuario/criollo.php'],
-        ];
-
-        // Generar las tarjetas
-        foreach ($cards as $card) {
-            echo '<div class="card">';
-            echo '<img src="' . $card['image'] . '" alt="' . $card['title'] . '">';
-            echo '<h3>' . $card['title'] . '</h3>';
-
-            // Bloque de estrellas
-            echo '<div class="stars">';
-            for ($i = 0; $i < 5; $i++) {
-                echo '<span class="star">★</span>'; // Estrella llena
-            }
-            echo '</div>';
-            echo '<a href="' . $card['url'] . '" class="ver-button"> Ver más</a>'; // Botón "Ver más" como enlace
-            echo '</div>';
-        }
-        ?>
     </div>
+
 </section>
 
+</div>
 
-<!-- <script src="js/scripts.js"></script> Incluir el archivo JavaScript -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    listarCategorias();
+});
+
+
+function listarCategorias() {
+    $.ajax({
+        type: 'POST',
+        url: '/app/controller/controladorCategorias.php',
+        data: {
+            accion: 'listarCategorias'
+        },
+        dataType: 'json',
+
+        success: function(categorias) {
+
+            
+            let container = $('.container');
+            container.empty();
+
+            categorias.forEach(function(categoria) {
+                const img = categoria.dir_img;
+                const estado = categoria.estado;
+
+                if (img != null) {
+                    if (estado == 'ACTIVO') {
+                        let cardHTML = `
+                    <div class="card">
+                        <img src="${categoria.dir_img}" alt="${categoria.nombre}">
+                        <h3>${categoria.nombre}</h3>
+                        <div class="stars">
+                            ${'★'.repeat(5)}
+                        </div>
+                        <button onclick="actualizarVistaProductos(${categoria.idCategoria});" class="ver-button">Ver más</button>
+                    </div>`;
+                        container.append(cardHTML);
+                    }
+                }
+
+            });
+        },
+        complete: function() {}
+    });
+}
+
+function actualizarVistaProductos(codCategoria) {
+    window.location.href = `/app/views/vistasUsuario/vistaProductos.php?codCategoria=${codCategoria}`;
+}
+</script>
+
+</body>

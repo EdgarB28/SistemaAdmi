@@ -8,12 +8,14 @@ function listarCategorias() {
     $categorias = [];
 
     $stmt = $mysqli->prepare("SELECT ID_CATEGORIA, NOMBRE,
-                   IF(FLAG_ESTADO = 1 , 'ACTIVO','INACTIVO') AS ESTADO, DESCRIPCION FROM CATEGORIA;");
+        IF(FLAG_ESTADO = 1 , 'ACTIVO','INACTIVO') AS ESTADO, DESCRIPCION ,
+        DIR_IMG
+        FROM CATEGORIA;");
     $stmt->execute();
     $result = $stmt->get_result();
 
     while ($row = $result->fetch_assoc()) {
-        $categoria = new Categoria($row['ID_CATEGORIA'], $row['NOMBRE'],$row['DESCRIPCION'] ,$row['ESTADO']);
+        $categoria = new Categoria($row['ID_CATEGORIA'], $row['NOMBRE'],$row['DESCRIPCION'] ,$row['ESTADO'],$row['DIR_IMG']);
         $categorias[] = $categoria;
     }
 

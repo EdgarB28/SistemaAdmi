@@ -6,15 +6,19 @@ class productos {
     private $tipCategoria;
     private $cantidad;
     private $idCategoria;
+    private $dir_img;
+    private $descrip;
 
   
-    public function __construct($idProducto, $nombre,$precio,  $tipCategoria = null,$cantidad=null,$idCategoria=null) {
+    public function __construct($idProducto, $nombre,$precio,  $tipCategoria = null,$cantidad=null,$idCategoria=null,$dir_img=null,$descrip=null) {
         $this->idProducto = $idProducto;
         $this->nombre = $nombre;
         $this->precio =$precio;
         $this->tipCategoria = $tipCategoria;
         $this->cantidad = $cantidad;
         $this->idCategoria = $idCategoria;
+        $this->dir_img = $dir_img;
+        $this->descrip = $descrip;
     }
 
    
@@ -37,6 +41,13 @@ class productos {
         if($this->idCategoria !==null){
             $data['idCategoria'] = $this->idCategoria;
         }
+        if($this->dir_img !==null){
+            $data['dir_img'] = $this->dir_img;
+        }
+        if($this->descrip !==null){
+            $data['descrip'] = $this->descrip;
+        }
+
 
         return $data;
     }

@@ -4,23 +4,31 @@ class Categoria {
     private $nombre;
     private $descripcion;
     private $estado;
+    private $dir_img;
 
   
-    public function __construct($idCategoria, $nombre, $descripcion,$estado) {
+    public function __construct($idCategoria, $nombre, $descripcion,$estado,$dir_img=null) {
         $this->idCategoria = $idCategoria;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->estado = $estado;
+        $this->dir_img = $dir_img;
     }
 
    
     public function toArray() {
-        return [
+        $data = [
             'idCategoria' => $this->idCategoria,
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
             'estado'=>$this->estado
         ];
+
+        if ($this->dir_img !== null) {
+            $data['dir_img'] = $this->dir_img;
+        }
+
+        return $data;
     }
 
     public function getestado(){

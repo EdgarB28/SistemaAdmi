@@ -303,5 +303,43 @@ body {
 }
 
 
-
+#carrito-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #ff6f61;
+    color: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+  
+  #carrito-flotante:hover {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  #contenido-carrito {
+    display: none;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  #carrito-flotante:hover #contenido-carrito {
+    display: block;
+  }
+  
+  #icono-carrito {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
 

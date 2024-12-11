@@ -16,7 +16,7 @@ function listarProducto($idCategoria, $monto) {
 
     // Recorre los resultados
     while ($row = $result->fetch_assoc()) {
-        $producto = new productos($row['ID'], $row['NOMBRE'], $row['PRECIO'], $row['CATEGORIA'] , null , $row['ID_CAT']);
+        $producto = new productos($row['ID'], $row['NOMBRE'], $row['PRECIO'], $row['CATEGORIA'] , null , $row['ID_CAT'],$row['DIR_IMG'],$row['DESCRIPCION']);
         $productos[] = $producto;
     }
 
